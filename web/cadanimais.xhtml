@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+ 
+    <ui:decorate template="index.xhtml">
+        <ui:define name="centro">
+            <p:fieldset legend="Cadastro de Animais" toggleable="true">
+                <h:form>
+                    <h:panelGrid columns="3" id="gridanimais">
+                        
+                        <p:outputLabel value="Nome: "/>
+                        <p:inputText id="nome" value="#{animalController.animal.descricao}" required="true" requiredMessage="O campo nome deve ser preenchido"/>
+                        <p:message for="nome"/>
+                        
+                        <p:outputLabel value="Raça: "/>
+                        <p:inputText id="raca" value="#{animalController.animal.raca}" required="true" requiredMessage="O campo raça deve ser preenchido"/>
+                        <p:message for="raca"/>
+
+                        <p:outputLabel value="Idade: "/>
+                        <p:selectOneMenu id="idade" value="#{ animalController.animal.idade}">
+                            <f:selectItem itemLabel="Selecione" itemValue=""/>
+                            <f:selectItem itemLabel="De 0 mês a 3 meses" itemValue="1"/>
+                            <f:selectItem itemLabel="De 4 meses a 7 meses" itemValue="2"/>
+                            <f:selectItem itemLabel="De 8 meses a 1 ano" itemValue="3"/>
+                            <f:selectItem itemLabel="De 2 anos a 4 anos" itemValue="4"/>
+                            <f:selectItem itemLabel="Acima de 4 anos" itemValue="5"/>
+                        </p:selectOneMenu>
+                        <p:message for="idade"/>
+
+                        <p:outputLabel value="Histórico: "/>
+                        <p:inputTextarea id="historico" label="Máximo de 2000 caracteres" value="#{animalController.animal.historico}" />
+                        <p:message for="historico"/>                        
+
+                        <p:outputLabel value="Dono do Animal: "/>
+                        <p:inputText id="dono" value="#{animalController.animal.idCliente}" required="true" />
+                        <p:message for="dono"/>
+
+                        <p:outputLabel value="Vacinado: "/>
+                        <p:selectOneMenu id="vacinado" value="#{ animalController.animal.vacinado}">
+                            <f:selectItem itemLabel="Selecione" itemValue=""/>
+                            <f:selectItem itemLabel="Sim" itemValue="S"/>
+                            <f:selectItem itemLabel="Não" itemValue="N"/>
+                        </p:selectOneMenu>
+                        <p:message for="vacinado"/>
+
+                        <p:outputLabel value="Vermifugado: "/>
+                        <p:selectOneMenu id="vermifugado" value="#{ animalController.animal.vermifugado}">
+                            <f:selectItem itemLabel="Selecione" itemValue=""/>
+                            <f:selectItem itemLabel="Sim" itemValue="S"/>
+                            <f:selectItem itemLabel="Não" itemValue="N"/>
+                        </p:selectOneMenu>
+                        <p:message for="vermifugado"/>
+                        
+                    </h:panelGrid>
+                    
+                    <p:separator style="width: 80%; height: 5px"/>
+                    
+                    <p:commandButton value="Salvar" rendered="#{animalController.isExibeBtnSalvar()}" update="gridanimais" action="#{animalController.salvaAnimal()}"/>
+
+                    <p:commandButton value="Alterar" rendered="#{animalController.isExibeBtnAlterar()}" update="gridanimais" action="#{animalController.alteraAnimal()}"/>
+
+                    <p:commandButton value="Limpar" type="reset"/>
+
+                </h:form>
+            </p:fieldset>
+        </ui:define>
+    </ui:decorate>
+</html>
+

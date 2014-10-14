@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:decorate template="index.xhtml">
+        <ui:define name="centro">
+            <p:fieldset legend="Cadastro de Clientes" toggleable="true">
+                <h:form>
+                    <h:panelGrid columns="3" id="gridclientes">
+                        <p:outputLabel value="Nome: "/>
+                        <p:inputText id="nome" value="#{clienteController.cliente.nomeCliente}" required="true" requiredMessage="O campo nome deve ser preenchido"/>
+                        <p:message for="nome"/>
+                        
+                        <p:outputLabel value="CPF: "/>
+                        <p:inputText id="cpf" value="#{clienteController.cliente.cpf}" required="true" requiredMessage="O campo raça deve ser preenchido"/>
+                        <p:message for="cpf"/>
+
+                        <p:outputLabel value="Data de Nascimento: "/>
+                        <p:calendar id="dtnascimento"   value="#{ clienteController.cliente.dtNascimento}" pattern="yyyy/mm/dd">
+                        </p:calendar>
+                        <p:message for="dtnascimento"/>
+
+                        <p:outputLabel value="Endereço "/>
+                        <p:inputTextarea id="endereco" label="Máximo de 2000 caracteres" value="#{clienteController.cliente.endereco}" />
+                        <p:message for="endereco"/>                        
+
+                        <p:outputLabel value="CEP: "/>
+                        <p:inputText id="cep" label="Máximo de 2000 caracteres" value="#{clienteController.cliente.cep}" />
+                        <p:message for="cep"/>                        
+
+                    </h:panelGrid>
+                    
+                    <p:separator style="width: 80%; height: 5px"/>
+                    
+                    <p:commandButton value="Salvar" rendered="#{clienteController.isExibeBtnSalvar()}" update="gridclientes" action="#{clienteController.salvaCliente()}"/>
+
+                    <p:commandButton value="Alterar" rendered="#{clienteController.isExibeBtnAlterar()}" update="gridclientes" action="#{clienteController.alteraCliente()}"/>
+
+                    <p:commandButton value="Limpar" type="reset"/>
+
+                </h:form>
+            </p:fieldset>
+        </ui:define>
+    </ui:decorate>
+
+</html>
+
